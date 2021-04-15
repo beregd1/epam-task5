@@ -2,6 +2,7 @@ package com.epam.rd.java.basic.practice5;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.logging.Logger;
 
 public class Part5 {
 
@@ -17,7 +18,7 @@ public class Part5 {
         try {
             Files.deleteIfExists(new File(FILE_NAME).toPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         try (RandomAccessFile file = new RandomAccessFile(FILE_NAME, "rw")) {
             for (int k = 0; k < THREADS_COUNT; k++) {
@@ -39,7 +40,7 @@ public class Part5 {
             joinThread();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
@@ -50,7 +51,7 @@ public class Part5 {
             }
             System.out.print(outputStringSB.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
@@ -61,7 +62,7 @@ public class Part5 {
                 t.join();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -78,7 +79,7 @@ public class Part5 {
                 Thread.sleep(1);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
         file.write(ls.getBytes());
