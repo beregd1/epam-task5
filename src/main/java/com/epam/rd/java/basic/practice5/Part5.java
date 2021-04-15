@@ -1,4 +1,5 @@
 package com.epam.rd.java.basic.practice5;
+
 import java.io.*;
 import java.nio.file.Files;
 
@@ -18,7 +19,7 @@ public class Part5 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (RandomAccessFile file = new RandomAccessFile(FILE_NAME, "rw")){
+        try (RandomAccessFile file = new RandomAccessFile(FILE_NAME, "rw")) {
             for (int k = 0; k < THREADS_COUNT; k++) {
                 int finalK = k;
                 Thread t2 = new Thread(() -> {
@@ -65,11 +66,11 @@ public class Part5 {
         }
     }
 
-    private static void threadJob( RandomAccessFile file, int k) throws IOException {
+    private static void threadJob(RandomAccessFile file, int k) throws IOException {
 
-        currentPosition = (SYMBOLS_COUNT+ls.length()) * (long)k;
+        currentPosition = (SYMBOLS_COUNT + ls.length()) * (long) k;
 
-        for (int i = 0; i < SYMBOLS_COUNT ; i++) {
+        for (int i = 0; i < SYMBOLS_COUNT; i++) {
             file.seek(currentPosition);
             file.write(Integer.toString(k).getBytes());
             currentPosition++;
@@ -81,6 +82,6 @@ public class Part5 {
             }
         }
         file.write(ls.getBytes());
-        file.seek(currentPosition+ls.length());
+        file.seek(currentPosition + ls.length());
     }
 }
